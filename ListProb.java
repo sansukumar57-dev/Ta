@@ -2,60 +2,47 @@ package Problems;
 
 import java.util.*;
 
+import  java.util.Collections;
+
 public class ListProb {
    public static void main(String[] args) {
-       System.out.println("hello world");
+
+       List<String> l=new ArrayList<>();
+       l.add("a");
+       l.add("b");
+       l.add("c");
+       l.add("d");
+       System.out.println(l);
+
+       System.out.println(l.isEmpty());
+
+       System.out.println(l.get(3));
+       System.out.println(l.contains("c"));
+
+       ArrayList<String> list =new ArrayList<>();
+
+       list.add("Apple");
+       list.add("Banana");
+       Collections.addAll(list,"Mango","Grapes");
+       System.out.println("After Adding: "+ list);
 
 
-     //  list
-       List<String> list= new ArrayList<>();
-       list.add("Hero");
-       list.add("zoro");
-       list.add("Villan");
-       list.add("Anti-heroiene");
-
-       System.out.println("List of element ");
-       for(int i=0;i<list.toArray().length;i++){
-           System.out.println(list);
-
+       list.remove("Banana");
+       list.remove(0);
+       System.out.println("After Removing "+list);
+       if(list.contains("Mango")){
+           System.out.println("Mango is Present ");
        }
-       System.out.println(
-               "Second Element"       );
-       System.out.println(list.get(1));
-       list.remove("zoro");
-       System.out.println("After deleted : "+list);
-       ArrayList<String> tasks= new ArrayList<>();
-       tasks.add("Study Dsa");
-       tasks.add("Build Projects");
-       tasks.add("Study Dsa");// duplicates can be allowed
-       System.out.println(tasks);
-       //add
-       tasks.add("New Tasks");
-       tasks.remove(2);
-       tasks.get(0);
-       tasks.size();
-       tasks.contains("Studey");
-       HashSet<String> set = new HashSet<>();
+       list.set(0,"Apple");
+       System.out.println("After Updating "+ list);
 
-       set.add("Java");
-       set.add("Python");
-       set.add("Java"); // ignored
-
-       System.out.println(set);
-       Queue<String> queue = new LinkedList<>();
-
-       queue.add("Task 1");
-       queue.add("Task 2");
-
-       System.out.println(queue.poll()); // removes first
-       HashMap<Integer, String> students = new HashMap<>();
-
-       students.put(1, "Arun");
-       students.put(2, "Vijay");
-
-       System.out.println(students.get(1));
-
-
+       ArrayList <String> fr=new ArrayList<>();
+       fr.add("Banana");
+       fr.add("Apple");
+       fr.add("Mango");
+       fr.add("Grapse");
+       Collections.sort(fr);
+       System.out.println("After Sorting "+fr);
 
    }
 }
