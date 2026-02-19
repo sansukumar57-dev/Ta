@@ -1,48 +1,32 @@
 package Problems;
 
+import java.math.BigInteger;
 import java.util.*;
-
-import  java.util.Collections;
-
 public class ListProb {
+   static long simpleArray(int[] a){
+       long sum=0;
+       for (int i = 0; i < a.length; i++) {
+           sum= sum+a[i];
+       }
+return sum;
+    }
    public static void main(String[] args) {
 
-       List<String> l=new ArrayList<>();
-       l.add("a");
-       l.add("b");
-       l.add("c");
-       l.add("d");
-       System.out.println(l);
+//       Scanner sc=new Scanner(System.in);
+//       System.out.println("Enter the number");
+//       int six=sc.nextInt();
+//       int[] array=new int[six];
+//       for(int i=0;i<six;i++){
+//        array[i]  =sc.nextInt();
+//       }
+       Scanner sc=new Scanner(System.in);
+     int n=sc.nextInt();
+     int[] arr=new int[n];
 
-       System.out.println(l.isEmpty());
-
-       System.out.println(l.get(3));
-       System.out.println(l.contains("c"));
-
-       ArrayList<String> list =new ArrayList<>();
-
-       list.add("Apple");
-       list.add("Banana");
-       Collections.addAll(list,"Mango","Grapes");
-       System.out.println("After Adding: "+ list);
-
-
-       list.remove("Banana");
-       list.remove(0);
-       System.out.println("After Removing "+list);
-       if(list.contains("Mango")){
-           System.out.println("Mango is Present ");
-       }
-       list.set(0,"Apple");
-       System.out.println("After Updating "+ list);
-
-       ArrayList <String> fr=new ArrayList<>();
-       fr.add("Banana");
-       fr.add("Apple");
-       fr.add("Mango");
-       fr.add("Grapse");
-       Collections.sort(fr);
-       System.out.println("After Sorting "+fr);
+     for(int i=0;i<n;i++){
+     arr[i]= sc.nextInt();
+     }
+    System.out.println(ListProb.simpleArray(arr));
 
    }
 }
