@@ -49,11 +49,6 @@ while (true) {
         if (option.equals("1"))
         {
             boolean taskFlag=false;
-
-
-
-
-
             if(!taskFlag)
             {
 
@@ -80,34 +75,45 @@ while (true) {
                 {
                     System.out.println("Enter the yes/no ");
                 }
+                currentUser.getTaskList().add(task);
+
 
 
                 System.out.println("Enter the Date and Time (yes/no)");
                 String dateTimeOption=sc.nextLine();
                 if(dateTimeOption.equals("yes")){
                     System.out.println("Enter the Start Day Time ( dd.MM.yyyy HH:mm )");
-                    Integer startDateTime=sc.nextInt();
+                    System.out.println("Enter the date ");
+                    int date=new Integer(sc.nextLine());
+                    System.out.println("Enter the time");
+                    int time=new Integer(sc.nextLine());
+                    String startDateTime=sc.nextLine();
 
-                    DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-                    LocalDateTime localDateTime=LocalDateTime.of(startDateTime);
+                    DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("d.M.yyyy H:mm");
+                    LocalDateTime localDateTime=LocalDateTime.of(date,time);
+                    task.setStartDateTime(localDateTime);
 
+                    System.out.println("If you want to add end Date and Time");
+                    String endOption=sc.nextLine();
+                    if(endOption.equals("yes")) {
+                        System.out.println("Enter the End Day Time ( d.M.yyyy H:mm )");
+                        String endDateTime = sc.nextLine();
+                        LocalDateTime endLocalDateTime=LocalDateTime.parse(endDateTime,dateTimeFormatter);
+                        task.setEndDateTime(endLocalDateTime);
 
-
-
-
-
-
-                    System.out.println("Enter the End Day Time ( dd.MM.yyyy HH:mm )");
-                    String endDateTime=sc.nextLine();
-
-
+                    }
                 }
-                currentUser.getTaskList().add(task);
 
                 for (int i = 0; i < currentUser.getTaskList().size(); i++) {
                     if(currentUser.getTaskList().get(i)!=null){
                         System.out.print(i+1+". "+currentUser.getTaskList().get(i).getTitle());
-                        System.out.println(" "+"["+currentUser.getTaskList().get(i).getDescription()+"] ");
+                        System.out.print(" "+"["+currentUser.getTaskList().get(i).getDescription()+"] ");
+                        System.out.print(" <" +currentUser.getTaskList().get(i).getStartDateTime()+"> ");
+                        if(currentUser.getTaskList().get(i).getStartDateTime()!=null){
+                            System.out.print(currentUser.getTaskList().get(i).getStartDateTime());
+                        }
+                        System.out.println();
+
 
                     }
                 }
@@ -130,6 +136,11 @@ while (true) {
 
                     System.out.print(i+1+". "+currentUser.getTaskList().get(i).getTitle());
                     System.out.print(" "+"["+currentUser.getTaskList().get(i).getDescription()+"] ");
+                    System.out.print(" <" +currentUser.getTaskList().get(i).getStartDateTime()+"> ");
+                    if(currentUser.getTaskList().get(i).getStartDateTime()!=null){
+                        System.out.print(currentUser.getTaskList().get(i).getStartDateTime());
+                    }
+                    System.out.println();
                     showList=true;
 
                 }
@@ -140,6 +151,9 @@ while (true) {
 
         } else if (option.equals("3")) {
             break;
+        }
+        else {
+            System.out.println("Enter the correct option ");
         }
 
 

@@ -1,8 +1,13 @@
 package TaskManagerFinal;
 
+import java.time.LocalDateTime;
+
 public class Task {
     private String title;
     private String description;
+    private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
+
     public Task(){
 
     }
@@ -24,5 +29,21 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public LocalDateTime getStartDateTime() {
+        return startDateTime;
+    }
+
+    public void setStartDateTime(LocalDateTime startDateTime) {
+        this.startDateTime = startDateTime;
+    }
+
+    public LocalDateTime getEndDateTime() {
+        return endDateTime;
+    }
+
+    public void setEndDateTime(LocalDateTime endDateTime) {
+        this.endDateTime = endDateTime;
     }
 }
