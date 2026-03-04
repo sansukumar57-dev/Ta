@@ -1,18 +1,21 @@
 package TaskManagerFinal;
 
-import java.time.LocalDateTime;
-
 public class Task {
     private String title;
     private String description;
-    private LocalDateTime startDateTime;
-    private LocalDateTime endDateTime;
+    private String startDateTime;
+    private String endDateTime;
+    private String status;
 
-    public Task(){
+
+    public Task() {
 
     }
-    public Task(String title){
-        this.title=title;
+
+    public Task(String title) {
+        this.title = title;
+        this.status="Todo";
+        this.endDateTime=null;
     }
 
     public String getTitle() {
@@ -31,19 +34,27 @@ public class Task {
         this.description = description;
     }
 
-    public LocalDateTime getStartDateTime() {
+    public String getStartDateTime() {
         return startDateTime;
     }
 
-    public void setStartDateTime(LocalDateTime startDateTime) {
+    public void setStartDateTime(String startDateTime) {
         this.startDateTime = startDateTime;
     }
 
-    public LocalDateTime getEndDateTime() {
+    public String getEndDateTime() {
         return endDateTime;
     }
 
-    public void setEndDateTime(LocalDateTime endDateTime) {
+    public void setEndDateTime(String endDateTime) {
         this.endDateTime = endDateTime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
