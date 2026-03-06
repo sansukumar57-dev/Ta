@@ -18,6 +18,11 @@ public class Task {
         this.status="Todo";
         this.endDateTime=null;
     }
+    public void createOrUpdate(String title,String description){
+        this.title=title;
+        this.description=description;
+
+    }
 
     public String getTitle() {
         return title;
