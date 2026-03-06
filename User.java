@@ -4,20 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private Integer id;
+
     private String username;
-    private List<Task> taskList=new ArrayList<>();
-    public User(){
+    private String password;
+    private Task[] taskArray = new Task[10];
+
+
+    public User() {
 
     }
-    public User(Integer id,String username){
-        this.id = id;
-        this.username=username;
+
+    public User(String username, String password) {
+
+        this.username = username;
+        this.password = password;
     }
 
-    public User(int id) {
 
-    }
 
     public String getUsername() {
         return username;
@@ -27,19 +30,20 @@ public class User {
         this.username = username;
     }
 
-    public List<Task> getTaskList() {
-        return taskList;
+
+    public Task[] getTaskArray() {
+        return taskArray;
     }
 
-    public void setTaskList(List<Task> taskList) {
-        this.taskList = taskList;
+    public void setTaskArray(Task[] taskArray) {
+        this.taskArray = taskArray;
     }
 
-    public Integer getId() {
-        return id;
+    public String getPassword() {
+        return password;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

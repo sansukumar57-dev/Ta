@@ -1,34 +1,75 @@
 package TaskManagerFinal;
+//folder called TaskManager Final
 
 
 import java.util.Scanner;
+//java libirary gives the scanner class
 
 public class Main {
+// public isthe access modifier
+
+    static int login(User[] arr,String username,String password){
+
+        if(arr[0]!=null){
+        for (int i = 0; i < arr.length; i++) {
+            if(arr[i]!=null){
+                   if(  arr[i].getUsername().equals(username)){
+                         if(arr[i].getPassword().equals(password)){
+                  return i;
+                         }
+                         else {
+                             return -2;
+                         }
+                   }
+            }
+
+
+        }
+        }
+        return -1;
+    }
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        Task[][] userArray = new Task[10][10];
+        User[] users=new User[10];
 
         while (true) {
-            System.out.println("Enter User Id");
-            Integer id=0;
-            try {
-                id = new Integer(sc.nextLine());
-                if (id < 1 || id > 10) {
-                    System.out.println("Invalid User ID");
-                    continue;
-                }
-            }
-            catch (Exception e){
-                System.out.println("Enter the valid number");
+            System.out.println("Enter Username:");
+            String username=sc.nextLine();
+            System.out.println("Enter the Password");
+            String password=sc.nextLine();
+
+          int currentuser=  Main.login(users,username,password);
+
+          if(currentuser==-2){
+                System.out.println("Invalid Credintials ");
                 continue;
             }
-            Task[] taskArray=userArray[id-1];
+           else if(currentuser ==-1){
+                System.out.println("creating the user");
+              User user=new User();
+                user.setUsername(username);
+                user.setPassword(password);
+                for (int i = 0; i < users.length; i++) {
+                    if(users[i]==null){
+                        users[i]=user;
+                        currentuser=i;
+                        break;
+                    }
+
+                }
+            }else{
+              System.out.println("Welcome back "+username);
+          }
+
+            Task[] taskArray = users[currentuser].getTaskArray();
+            
+
 
             int choice = 0;
             while (choice != 5) {
-                Task task=new Task();
+
                 System.out.println("\n1.Add task");
                 System.out.println("2.Read Task");
                 System.out.println("3.Update Task");
@@ -40,15 +81,22 @@ public class Main {
 
                 try {
                   choice = new Integer(sc.nextLine());
-                } catch (NumberFormatException e) {
+                } catch (Exception e) {
                     System.out.println("Enter a valid number:");
                     continue;
                 }
                 if (choice == 1) {
+                    Task task=new Task();
                     while(true) {
 
                         System.out.println("Add Title");
                         String title = sc.nextLine();
+                        if(title==null|| title.isEmpty()){
+                            System.out.println("Title should not be empty");
+                            continue;
+                        }
+
+
                         System.out.println("Add description ");
                         String description = sc.nextLine();
 
@@ -110,7 +158,7 @@ public class Main {
                                 System.out.println("Enter the correct number ");
                                 continue;
                             }
-                            if(choicetoupdate>=taskArray.length||taskArray[choicetoupdate] == null){
+                            if(choicetoupdate <= 0 || choicetoupdate > taskArray.length || taskArray[choicetoupdate - 1] == null){
                                 continue;
                             }
                             System.out.print("Enter new title: ");
@@ -148,12 +196,12 @@ public class Main {
                                 System.out.println("Enter the correct value");
                                 continue;
                             }
-                            if(choicetoupdate>=taskArray.length||taskArray[choicetoupdate] == null)
+                            if(choicetoupdate <= 0 || choicetoupdate > taskArray.length || taskArray[choicetoupdate - 1] == null)
                             {
                                 continue;
                             }
 
-                            for (int i = choicetoupdate; i < taskArray.length-1; i++) {
+                            for (int i = choicetoupdate-1; i < taskArray.length-1; i++) {
                                 taskArray[i] = taskArray[i + 1];
                             }
                             taskArray[taskArray.length - 1] = null;
@@ -170,7 +218,7 @@ public class Main {
                 }
                 else {
                     System.out.println("Enter correct number ");
-
+                    continue;
                 }
 
 
