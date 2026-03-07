@@ -1,5 +1,5 @@
 package TaskManagerFinal;
 
-public abstract class Utility {
+public  class Utility {
 
 }

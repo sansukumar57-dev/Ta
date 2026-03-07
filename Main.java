@@ -1,8 +1,8 @@
 package TaskManagerFinal;
 //folder called TaskManager Final
-
-
 import java.util.Scanner;
+
+
 //java libirary gives the scanner class
 
 public class Main {
@@ -34,199 +34,289 @@ public class Main {
         int appchoice=1;
 
 
-        while (appchoice==1) {
+        while (appchoice==1)
+        {
             System.out.println("Welcome  to Task Manager");
-            while (true) {
-                System.out.println("1. Start 0. Close");
+            boolean flag = false;
+            while (!flag) {
+                System.out.println("1. Start 2. Close");
+                System.out.println("==================");
                 try {
                     appchoice = new Integer(sc.nextLine());
 
-                    if ( appchoice>1) {
-                        System.out.println("enter the o or 1 ");
+                    if (appchoice > 3 || appchoice < 0) {
+                        System.out.println("enter the 1 or 2 ");
                         continue;
                     }
                 } catch (Exception e) {
-                    System.out.println("Enter (1 / 0) ");
-                    break;
-                }
-
-                break;
-            }
-
-            if (appchoice == 0) {
-                continue;
-            }
-
-            System.out.println("Enter Username:");
-            String username=sc.nextLine();
-            System.out.println("Enter the Password");
-            String password=sc.nextLine();
-
-          int currentuser=  Main.login(users,username,password);
-            User user=null;
-          if(currentuser==-2){
-                System.out.println("Invalid Credintials ");
-                continue;
-            }
-           else if(currentuser ==-1){
-                System.out.println("creating the user");
-               user=new User();
-                user.setUsername(username);
-                user.setPassword(password);
-                for (int i = 0; i < users.length; i++) {
-                    if(users[i]==null){
-                        users[i]=user;
-                        currentuser=i;
-                        break;
-                    }
-
-                }
-            }
-
-           else{
-              System.out.println("Welcome back "+username);
-              user = users[currentuser];
-          }
-
-
-
-            int choice = 0;
-            while (choice != 5) {
-//                Task[] taskArray = users[currentuser].getTaskArray();
-
-                System.out.println("1.Add task");
-                System.out.println("2.Read Task");
-                System.out.println("3.Update Task");
-                System.out.println("4.Delete Task");
-                System.out.println("5.Exit ");
-                System.out.print("Enter the choice:");
-
-
-
-                try {
-                  choice = new Integer(sc.nextLine());
-                } catch (Exception e) {
-                    System.out.println("Enter a valid number:");
+                    System.out.println("Enter (1 / 2) ");
                     continue;
                 }
 
-                if (choice == 1) {
+                flag = true;
+            }
 
-                    Task task=new Task();
-                    while(true) {
+            if (appchoice == 2) {
+                continue;
+            }
+            while (flag == true)
+            {
 
-                        System.out.println("Add Title");
-                        String title = sc.nextLine();
-                        if(title==null|| title.isEmpty()){
-                            System.out.println("Title should not be empty");
-                            continue;
+                System.out.println("Enter Username:");
+                String username = sc.nextLine();
+
+                System.out.println("Enter the Password");
+                String password = sc.nextLine();
+
+                int currentuser = Main.login(users, username, password);
+                User user = null;
+                if (currentuser == -2) {
+                    System.out.println("Invalid Credintials ");
+                    continue;
+                } else if (currentuser == -1) {
+                    System.out.println("creating the user");
+
+                    user = new User(username,password);
+
+                    for (int i = 0; i < users.length; i++) {
+                        if (users[i] == null) {
+                            users[i] = user;
+                            currentuser = i;
+                            break;
                         }
 
-
-                        System.out.println("Add description ");
-                        String description = sc.nextLine();
-
-                     boolean taskCreate =  user.createTask(title,description);
-                     if(taskCreate==true){
-                         System.out.println("Task is created");
-                     }
-                     else {
-                         System.out.println("Error in creating the task");
-                     }
-                     break;
-
                     }
+                } else {
+                    System.out.println("Welcome Back " + username+" ['_']! ");
+                    user = users[currentuser];
                 }
 
-                else if (choice == 2) {
-                    while(true) {
-                        user.showTasks();
-                        break;
+
+                int choice = 0;
+                while (choice != 5) {
+
+                    System.out.println("1.Add task");
+                    System.out.println("2.Read Task");
+                    System.out.println("3.Update Task");
+                    System.out.println("4.Delete Task");
+                    System.out.println("5.Exit ");
+                    System.out.print("Enter the choice:");
+
+
+                    try {
+                        choice = new Integer(sc.nextLine());
+                    } catch (Exception e) {
+                        System.out.println("Enter a valid number:");
+                        continue;
                     }
-                }
 
-                else if (choice == 3) {
-                    while(true) {
+                    if (choice == 1) {
 
-                        System.out.println("Update Task");
-                        if (user.getTaskArray()[0] != null) {
+
+                        boolean addTask = false;
+                        String title ="";
+                        String addDes ="";
+                        while (!addTask) {
+
+                            System.out.println("Add Title");
+                            title = sc.nextLine();
+                            if (title.isEmpty()) {
+                                System.out.println("Title should not be empty");
+                                continue;
+                            }
+                            boolean addDesc=false;
+                            boolean taskCreate = false;
+                            while (!addDesc) {
+
+                                System.out.println("If you want to add description ( Yes ) / exit ( No )");
+                                addDes = sc.nextLine();
+
+
+                                if (addDes.equals("yes") || addDes.equals("Yes")) {
+                                    System.out.println("Add description ");
+                                    String description = sc.nextLine();
+
+                                    taskCreate = user.createTask(title, description,user);
+                                    if (taskCreate == true) {
+                                        System.out.println("Task is created");
+                                    } else {
+                                        System.out.println("Error in creating the task");
+                                    }
+                                    addDesc=true;
+
+
+                                } else if (addDes.equals("No") || addDes.equals("no")) {
+                                    addDesc=true;
+                                }
+                            }
+                             if (addDes.equals("No") || addDes.equals("no")) {
+
+                                 taskCreate = user.createTask(title, "",user);
+                                 if (taskCreate == true) {
+                                     System.out.println("Task is created");
+                                 } else {
+                                     System.out.println("Error in creating the task");
+                                 }
+
+                            }
+
+
+                            System.out.println("If You want to add Task [ Enter ]  Exit  [ no ]");
+                            String taskExit = sc.nextLine();
+
+                            if (taskExit.equals("no")) {
+                                addTask = true;
+                            }
+                        }
+                    } else if (choice == 2) {
+
+                        while (true) {
                             user.showTasks();
+                            break;
+                        }
+                    } else if (choice == 3) {
 
-                            System.out.println("Enter the number to Update");
-                            int choicetoupdate = 0;
-                            try {
-                                choicetoupdate = new Integer(sc.nextLine());
-                            } catch (Exception e) {
-                                System.out.println("Enter the correct number ");
+                        boolean update=false;
+                        while (!update)
+                        {
+
+                            System.out.println("Update Task");
+                            if (user.getTaskArray()[0] != null) {
+                                user.showTasks();
+
+                                System.out.println("Enter the number to Update");
+                                int choicetoupdate = 0;
+                                try {
+                                    choicetoupdate = new Integer(sc.nextLine());
+                                    if (choicetoupdate <= 0 || choicetoupdate > user.getTaskArray().length || user.getTaskArray()[choicetoupdate - 1] == null) {
+                                        System.out.println("Enter the correct number ");
+                                        continue;
+                                    }
+
+                                } catch (Exception e) {
+                                    System.out.println("Enter the correct number ");
+                                    continue;
+                                }
+                                System.out.println("What you wanna Update \n1.Title \n2. Description \n3. Status");
+                                String option=sc.nextLine();
+                                String title=null;
+                                String descripiton =null;
+                                String status=null;
+                                if(option.isEmpty()){
+                                    System.out.println("Enter any option ");
+                                    continue;
+                                }
+                                if(option.equals("1"))
+                                {
+                                    System.out.print("Enter new title: ");
+                                     title = sc.nextLine();
+                                    if (title.isEmpty()) {
+                                        System.out.println("Title should not be empty");
+                                        continue;
+
+                                    }
+                                } else if (option.equals("2")) {
+
+                                    System.out.print("Enter new description: ");
+                                    descripiton = sc.nextLine();
+                                    if (descripiton.isEmpty()) {
+                                        System.out.println("Description should not be empty");
+                                        continue;
+                                    }
+                                } else if (option.equals("3")) {
+                                    System.out.println("Pick any one to change the status \n1. Todo \n2. In-Progress \n3.Done ");
+                                    String updateStatusOption=sc.nextLine();
+                                    if(updateStatusOption.isEmpty()){
+                                        System.out.println("Enter the correct status");
+                                        continue;
+                                    }
+
+                                    if(updateStatusOption.equals("1"))
+                                    {
+                                        status="Todo";
+
+
+                                    } else if (updateStatusOption.equals("2")) {
+                                        status="In-Progress";
+
+                                    }else if (updateStatusOption.equals("3")) {
+                                        status="Done";
+
+                                    }
+                                    else {
+                                        System.out.println("Enter the correct Status option ");
+                                        continue;
+                                    }
+
+
+                                } else {
+                                    System.out.println("Enter correct option ");
+                                    continue;
+                                }
+                                user.updateTask(choicetoupdate, title, descripiton,status);
+                                System.out.println("Updated Successfully");
+
+                            } else {
+                                System.out.println("No tasks to update");
+                                continue;
+                            }
+                            System.out.println("If you want to Update Task [ Enter ] or exit (no) ");
+                            String updateTask=sc.nextLine();
+                            if(updateTask.equals("no")){
+                                update=true;
+                                break;
+                            }
+
+                            if(updateTask.equals("yes")){
                                 continue;
                             }
 
-                            System.out.print("Enter new title: ");
-                            String title = sc.nextLine();
-                            System.out.print("Enter new description: ");
-                            String descripiton = sc.nextLine();
-                        boolean up  =  user.updateTask(choicetoupdate, title, descripiton);
-                        if(up==true){
-                            System.out.println("Task Updated Successfully!");
                         }
-                        else {
-                            System.out.println("invalid number");
+                    } else if (choice == 4) {
+                        boolean delete=false;
+                        while (!delete) {
+
+                            if (user.getTaskArray()[0] != null) {
+
+                                user.showTasks();
+                                System.out.println("Enter the choice to delete ");
+                                int choicetodelete = 0;
+                                try {
+                                    choicetodelete = new Integer(sc.nextLine());
+                                    if (choicetodelete <= 0 || choicetodelete > user.getTaskArray().length || user.getTaskArray()[choicetodelete - 1] == null) {
+                                        System.out.println("Enter the correct number ");
+                                        continue;
+                                    }
+
+                                } catch (Exception e) {
+                                    System.out.println("Enter the correct value");
+                                    continue;
+                                }
+
+                               user.deleteTask(choicetodelete);
+
+                            } else {
+                                System.out.println("There is no task here to show");
+                            }
+                            System.out.println("If you want to delete Task (yes) or exit (no) ");
+                            String deleteTask=sc.nextLine();
+                            if(deleteTask.equals("no")){
+                               delete=true;
+
+                            }
 
                         }
 
 
-                        } else {
-                            System.out.println("No tasks to update");
-                            continue;
-                        }
+                    } else if (choice == 5) {
                         break;
-                    }
-                } else if (choice == 4) {
-                    while (true) {
+                    } else {
+                        System.out.println("Enter correct number ");
 
-                        if (user.getTaskArray()[0] != null) {
-//                            for (int i = 0; i < taskArray.length; i++) {
-//
-//                                if (taskArray[i] == null) {
-//                                    break;
-//                                }
-//                                else{
-//                                    System.out.println(i + 1 + ". " + taskArray[i].getTitle());//name
-//
-//                                }
-//                            }
-                            user.showTasks();
-                            System.out.println("Enter the choice to delete ");
-                            int choicetoupdate = 0;
-                            try {
-                                choicetoupdate = new Integer(sc.nextLine()) ;
-                            } catch (Exception e) {
-                                System.out.println("Enter the correct value");
-                                continue;
-                            }
-                      boolean del   =  user.deleteTask(choicetoupdate);
-                            if(del==true){
-                                System.out.println("Task deleted Successfully!");
-                            }
-                            else {
-                                System.out.println("invalid number");
-                            }
-                        } else {
-                            System.out.println("There is no task here to show");
-                        }
-                        break;
                     }
 
 
                 }
-                else if (choice == 5) {
-                    break;
-                }
-                else {
-                    System.out.println("Enter correct number ");
-
-                }
-
 
             }
 

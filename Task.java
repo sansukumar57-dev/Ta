@@ -1,23 +1,17 @@
 package TaskManagerFinal;
 
-public class Task {
+public class Task implements TaskInterface{
 
     private String title;
     private String description;
-    private String startDateTime;
-    private String endDateTime;
     private String status;
+    private  UserInterface user;
 
 
     public Task() {
-
-    }
-
-    public Task(String title) {
-        this.title = title;
         this.status="Todo";
-        this.endDateTime=null;
     }
+
     public void createOrUpdate(String title,String description){
         this.title=title;
         this.description=description;
@@ -40,21 +34,7 @@ public class Task {
         this.description = description;
     }
 
-    public String getStartDateTime() {
-        return startDateTime;
-    }
 
-    public void setStartDateTime(String startDateTime) {
-        this.startDateTime = startDateTime;
-    }
-
-    public String getEndDateTime() {
-        return endDateTime;
-    }
-
-    public void setEndDateTime(String endDateTime) {
-        this.endDateTime = endDateTime;
-    }
 
     public String getStatus() {
         return status;
@@ -63,4 +43,13 @@ public class Task {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public UserInterface getUser() {
+        return user;
+    }
+
+    public void setUser(UserInterface user) {
+        this.user = user;
+    }
+
 }
