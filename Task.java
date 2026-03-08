@@ -5,7 +5,7 @@ public class Task implements TaskInterface{
     private String title;
     private String description;
     private String status;
-    private  UserInterface user;
+
 
 
     public Task() {
@@ -44,12 +44,6 @@ public class Task implements TaskInterface{
         this.status = status;
     }
 
-    public UserInterface getUser() {
-        return user;
-    }
 
-    public void setUser(UserInterface user) {
-        this.user = user;
-    }
 
 }

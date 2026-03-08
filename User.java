@@ -1,11 +1,14 @@
 package TaskManagerFinal;
 
 
+
+
 public class User implements UserInterface {
 
     private String username;
     private String password;
     private TaskInterface[] taskArray = new Task[10];
+
 
 
     public User() {
@@ -41,14 +44,14 @@ public class User implements UserInterface {
     }
 
 
-    public boolean createTask(String title, String description,UserInterface user) {
+    public boolean createTask(String title, String description) {
 
         TaskInterface task = new Task();
         task.createOrUpdate(title, description);
-        task.setUser(user);
-        for (int i = 0; i < this.getTaskArray().length; i++) {
-            if (taskArray[i] == null) {
-                taskArray[i] = task;
+
+        for (int i = 0; i < this.taskArray.length; i++) {
+            if (this.taskArray[i] == null) {
+                this.taskArray[i] = task;
 
                 return true;
             }
@@ -56,18 +59,54 @@ public class User implements UserInterface {
         return false;
     }
 
-    public void showTasks() {
+    public void showTasks(int n) {
 
         if (taskArray[0] != null) {
+            if(n==1) {
+                for (int i = 0; i < taskArray.length; i++) {
+                    if (taskArray[i] != null) {
+                        System.out.print(i + 1 + "] Task: " + taskArray[i].getTitle() + " | ");
+                        System.out.print("Description: " + taskArray[i].getDescription() + " | ");
+                        System.out.println("Status: < " + taskArray[i].getStatus() + " >");
 
-            for (int i = 0; i < taskArray.length; i++) {
-                if (taskArray[i] != null) {
-                    System.out.print(i + 1 + "] Task: " + taskArray[i].getTitle()+" | ");
-                    System.out.print("Description: " + taskArray[i].getDescription()+" | ");
-                    System.out.println("Status: < "+taskArray[i].getStatus()+" >");
+                    }
+                }
+            } else if (n==2) {
+                for (int i = 0; i < taskArray.length; i++) {
+                    if (taskArray[i] != null) {
+                        if (taskArray[i].getStatus().equals("Todo"))
+                            System.out.print(i + 1 + "] Task: " + taskArray[i].getTitle() + " | ");
+                        System.out.print("Description: " + taskArray[i].getDescription() + " | ");
+                        System.out.println("Status: < " + taskArray[i].getStatus() + " >");
+                    }
+
+                    }
+                } else if (n==3) {
+                for (int i = 0; i < taskArray.length; i++) {
+                    if (taskArray[i] != null) {
+                        if (taskArray[i].getStatus().equals("In-Progress"))
+                            System.out.print(i + 1 + "] Task: " + taskArray[i].getTitle() + " | ");
+                        System.out.print("Description: " + taskArray[i].getDescription() + " | ");
+                        System.out.println("Status: < " + taskArray[i].getStatus() + " >");
+                    }
 
                 }
+
+            } else if (n==4) {
+                for (int i = 0; i < taskArray.length; i++) {
+                    if (taskArray[i] != null) {
+                        if (taskArray[i].getStatus().equals("Done"))
+                            System.out.print(i + 1 + "] Task: " + taskArray[i].getTitle() + " | ");
+                        System.out.print("Description: " + taskArray[i].getDescription() + " | ");
+                        System.out.println("Status: < " + taskArray[i].getStatus() + " >");
+                    }
+
+                }
+
             }
+
+
+
         } else {
             System.out.println(" task is Not here ");
         }
@@ -90,10 +129,7 @@ public class User implements UserInterface {
 
     public void deleteTask(int indexValue) {
 
-        if (taskArray[indexValue - 1] == null) {
-            System.out.println("Task is not found");
-            return;
-        }
+
 
 
         for (int i = indexValue - 1; i < taskArray.length - 1; i++) {

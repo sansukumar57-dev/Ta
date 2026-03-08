@@ -8,6 +8,5 @@ public interface TaskInterface {
     public void setDescription(String description);
     public String getStatus();
     public void setStatus(String status);
-    public UserInterface getUser() ;
-    public void setUser(UserInterface user);
+
 }

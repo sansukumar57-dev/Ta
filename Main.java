@@ -8,25 +8,6 @@ import java.util.Scanner;
 public class Main {
 // public isthe access modifier
 
-    static int login(User[] arr,String username,String password){
-
-        if(arr[0]!=null){
-        for (int i = 0; i < arr.length; i++) {
-            if(arr[i]!=null){
-                   if(  arr[i].getUsername().equals(username)){
-                         if(arr[i].getPassword().equals(password)){
-                  return i;
-                         }
-                         else {
-                             return -2;
-                         }
-                   }
-            }
-        }
-        }
-        return -1;
-    }
-
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -44,7 +25,7 @@ public class Main {
                 try {
                     appchoice = new Integer(sc.nextLine());
 
-                    if (appchoice > 3 || appchoice < 0) {
+                    if (appchoice > 2 || appchoice < 0) {
                         System.out.println("enter the 1 or 2 ");
                         continue;
                     }
@@ -68,7 +49,7 @@ public class Main {
                 System.out.println("Enter the Password");
                 String password = sc.nextLine();
 
-                int currentuser = Main.login(users, username, password);
+                int currentuser = Utility.login(users, username, password);
                 User user = null;
                 if (currentuser == -2) {
                     System.out.println("Invalid Credintials ");
@@ -114,8 +95,8 @@ public class Main {
 
 
                         boolean addTask = false;
-                        String title ="";
-                        String addDes ="";
+                        String title =null;
+                        String addDes =null;
                         while (!addTask) {
 
                             System.out.println("Add Title");
@@ -136,7 +117,7 @@ public class Main {
                                     System.out.println("Add description ");
                                     String description = sc.nextLine();
 
-                                    taskCreate = user.createTask(title, description,user);
+                                    taskCreate = user.createTask(title, description);
                                     if (taskCreate == true) {
                                         System.out.println("Task is created");
                                     } else {
@@ -151,7 +132,7 @@ public class Main {
                             }
                              if (addDes.equals("No") || addDes.equals("no")) {
 
-                                 taskCreate = user.createTask(title, "",user);
+                                 taskCreate = user.createTask(title, "");
                                  if (taskCreate == true) {
                                      System.out.println("Task is created");
                                  } else {
@@ -171,7 +152,21 @@ public class Main {
                     } else if (choice == 2) {
 
                         while (true) {
-                            user.showTasks();
+
+                            System.out.println("1. Show All task ");
+                            System.out.println("2. Show the Todo");
+                            System.out.println("3. Show the In-Progress");
+                            System.out.println("4. Show the Done");
+                            System.out.println("Pick any option To show");
+                            int showOption=0;
+                            try{
+                                 showOption=new Integer(sc.nextLine());
+                            }
+                            catch (Exception e){
+                                System.out.println("Enter the correct option");
+                                continue;
+                            }
+                            user.showTasks(showOption);
                             break;
                         }
                     } else if (choice == 3) {
@@ -283,14 +278,22 @@ public class Main {
                                 int choicetodelete = 0;
                                 try {
                                     choicetodelete = new Integer(sc.nextLine());
-                                    if (choicetodelete <= 0 || choicetodelete > user.getTaskArray().length || user.getTaskArray()[choicetodelete - 1] == null) {
-                                        System.out.println("Enter the correct number ");
-                                        continue;
+                                    if (choicetodelete <= 0 || choicetodelete > user.getTaskArray().length ) {
+                                       throw new Exception();
+                                    }
+                                    if( user.getTaskArray()[choicetodelete - 1] == null){
+                                        throw new Exception();
                                     }
 
                                 } catch (Exception e) {
-                                    System.out.println("Enter the correct value");
-                                    continue;
+                                    if(choicetodelete <= 0 || choicetodelete > user.getTaskArray().length) {
+                                        System.out.println("Enter the correct value");
+                                        continue;
+                                    }
+                                    if( user.getTaskArray()[choicetodelete - 1] == null){
+                                        System.out.println("Task is not here ");
+                                        continue;
+                                    }
                                 }
 
                                user.deleteTask(choicetodelete);
