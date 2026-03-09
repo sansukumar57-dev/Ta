@@ -8,6 +8,7 @@ public interface UserInterface {
     public void setPassword(String password);
     public boolean createTask(String title, String description);
     public void showTasks();
+    public boolean showTasks(int n);
     public void updateTask(int choicetoupdate, String title, String descripiton,String status) ;
     public void deleteTask(int indexValue) ;
 
