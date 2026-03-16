@@ -1,34 +1,33 @@
-package Problems;
+package Prb;
 
 import java.util.Scanner;
 
 public class Prob3 {
+    static int birthday(int[] arr,int d, int m){
+
+        for (int i = 0; i <arr.length ; i++) {
+            if(arr[i]<=m) {
+                for (int j = 0; j < arr.length; j++) {
+                    if (arr[i] + arr[j] == d) {
+                        return arr[j];
+                    }
+                }
+
+            }
+        }
+        return 1;
+    }
     public static void main(String[] args) {
-        Scanner sc= new Scanner(System.in);
-        int[] arr=new int[5];
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+
+        int[] arr=new int[n];
         for (int i = 0; i < arr.length; i++) {
-            arr[i]= sc.nextInt();
+            arr[i]=sc.nextInt();
         }
-        int sum=0;
-        int min=arr[0];
-        int max=arr[0];
-
-        for(int i = 0; i < arr.length; i++){
-            sum=sum+arr[i];
-        }
-
-        for(int i=0;i<arr.length;i++){
-            if(arr[i]<max) {
-                max = arr[i];
-            }
-            if(arr[i]>min) {
-                min =  arr[i];
-            }
-
-        }
-        System.out.println(sum-max);
-        System.out.println(sum-min);
-
-//
+        int d=sc.nextInt();
+        int m=sc.nextInt();
+        sc.nextLine();
+        System.out.println(Prob3.birthday(arr,d,m));
     }
 }
